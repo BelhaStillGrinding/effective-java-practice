@@ -44,300 +44,271 @@ Create a method:
 
 ```java
 int findNumber(int target, int[] data)
-Generate an array of 50 random integers (values 1–100)
+```
 
-Search for the target number
+1. Generate an array of 50 random integers (values 1–100).
+2. Search for the target number.
+3. Return the index if found.
+4. Otherwise, print a "not found" message.
 
-Return the index if found
+**_Effective Java – Item 57_**  
+Minimize the scope of local variables. Declare loop counters inside the for loop, not outside.
 
-Otherwise, print a "not found" message
-
-Effective Java – Item 57
-
-Minimize the scope of local variables.
-
-Declare loop counters inside the for loop, not outside.
-
-Expected Output:
-
+**Expected Output:**
+```plaintext
 > Searching for: 42
 Number found at index 12
 
-
-or
+OR
 
 Number not present in the array
+```
 
-Exercise 2: Single-Pass Analysis
+---
 
-Goal:
+## Exercise 2: Single-Pass Analysis
 
-Generate an array of 20 random integers
+**Goal:**  
+1. Generate an array of 20 random integers.
+2. Find both minimum and maximum values.
 
-Find both minimum and maximum values
+**_Effective Java – Item 59_**  
+Know and use the libraries. While manual loops are good practice, be aware that:
 
-Effective Java – Item 59
-
-Know and use the libraries.
-
-While manual loops are good practice, be aware that:
-
+```java
 Arrays.stream(arr).summaryStatistics()
-
+```
 
 is the modern standard.
 
-Expected Output:
-
+**Expected Output:**
+```plaintext
 Array: [12, 45, 2, 99, ...]
 Max = 99, Min = 2
+```
 
-Exercise 3: Array Reversal
+---
 
-Goal:
+## Exercise 3: Array Reversal
 
-Create an array of integers from 1 to 10
+**Goal:**  
+1. Create an array of integers from 1 to 10.
+2. Print it in original order.
+3. Reverse it manually (swap indices).
+4. Print the reversed array.
 
-Print it in original order
-
-Reverse it manually (swap indices)
-
-Print the reversed array
-
-Effective Java – Item 58
-
+**_Effective Java – Item 58_**  
 Prefer for-each loops when reading data, but recognize when index manipulation is required.
 
-Expected Output:
-
+**Expected Output:**
+```plaintext
 Original: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 Reversed: 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
+```
 
-Exercise 4: Conditional Summation
+---
 
-Goal:
+## Exercise 4: Conditional Summation
 
-Generate an array of 20 random numbers
+**Goal:**  
+1. Generate an array of 20 random numbers.
+2. Calculate the sum of even numbers only.
 
-Calculate the sum of even numbers only
+**_Effective Java – Item 45_**  
+Use streams judiciously. This logic can be expressed as:
 
-Effective Java – Item 45
-
-Use streams judiciously.
-
-This logic can be expressed as:
-
+```java
 Arrays.stream(arr).filter(x -> x % 2 == 0).sum();
+```
 
-
-Expected Output:
-
+**Expected Output:**
+```plaintext
 Array: [2, 5, 8, 11, ...]
 Sum of even numbers: 10
+```
 
-🧩 Module 2: The Object Contract (Entities)
+---
 
-Focus: Objects that behave correctly in HashSet, HashMap, and JPA.
+# 🧩 Module 2: The Object Contract (Entities)
+**Focus:** Objects that behave correctly in `HashSet`, `HashMap`, and JPA.
 
-Exercise 5: Immutable Person Class
+---
 
-Goal:
-Create an immutable Person class with:
+## Exercise 5: Immutable Person Class
 
-firstName (String)
+**Goal:**  
+Create an immutable `Person` class with:
 
-lastName (String)
+- `firstName` (String)
+- `lastName` (String)
+- `birthDate` (LocalDate)
 
-birthDate (LocalDate)
+**Rules:**  
+- All fields `private final`
+- Initialized via constructor
+- No setters
 
-Rules:
+**_Effective Java – Item 17_**  
+Minimize mutability. Immutable objects are:
+- Thread-safe
+- Easier to reason about
+- Safer in collections
 
-All fields private final
+---
 
-Initialized via constructor
+## Exercise 6: Equality Implementation
 
-No setters
+**Goal:**  
+Override the following methods for a `Person` object:
 
-Effective Java – Item 17
+- `equals()`
+- `hashCode()`
 
-Minimize mutability.
+Two `Person` objects are equal if:
+1. `firstName`
+2. `lastName`
+3. `birthDate`
 
-Immutable objects are:
+...are all identical.
 
-Thread-safe
+**_Effective Java – Item 11_**  
+Always override `hashCode` when you override `equals`.
 
-Easier to reason about
+---
 
-Safer in collections
+## Exercise 7: Set Uniqueness
 
-Exercise 6: Equality Implementation
+**Goal:**  
+1. Create 4 `Person` objects.
+2. Ensure 2 of them have identical data.
+3. Add all objects to a `HashSet`.
+4. Print the set size.
 
-Goal:
-Override:
+**_Effective Java – Item 10_**  
+Obey the general contract of `equals`.
 
-equals()
-
-hashCode()
-
-Two Person objects are equal if:
-
-First name
-
-Last name
-
-Birth date
-are all identical.
-
-Effective Java – Item 11
-
-Always override hashCode when you override equals.
-
-Exercise 7: Set Uniqueness
-
-Goal:
-
-Create 4 Person objects
-
-2 of them must have identical data
-
-Add all to a HashSet
-
-Print the set size
-
-Effective Java – Item 10
-
-Obey the general contract of equals.
-
-Expected Output:
-
+**Expected Output:**
+```plaintext
 Number of people in the set: 3
+```
 
-⚖️ Module 3: Object Ordering
+---
 
-Focus: Sorting for APIs, UI responses, and business logic.
+# ⚖️ Module 3: Object Ordering
+**Focus:** Sorting for APIs, UI responses, and business logic.
 
-Exercise 8: Natural Ordering (Comparable)
+---
 
-Goal:
+## Exercise 8: Natural Ordering (Comparable)
 
-Make Person implement Comparable<Person>
+**Goal:**  
+1. Make `Person` implement `Comparable<Person>`.
+2. Sort by age (ascending).
 
-Sort by age (ascending)
+**_Effective Java – Item 14_**  
+Consider implementing `Comparable`. Use:
 
-Effective Java – Item 14
-
-Consider implementing Comparable.
-
-Use:
-
+```java
 Integer.compare()
 LocalDate.compareTo()
+```
 
+...instead of subtraction.
 
-instead of subtraction.
-
-Expected Output:
-
+**Expected Output:**
+```plaintext
 Sorting by Age (Comparable):
 John Doe (Age: 25)
 Mario Rossi (Age: 30)
 Jane Smith (Age: 35)
+```
 
-Exercise 9: Custom Comparator
+---
 
-Goal:
+## Exercise 9: Custom Comparator
 
-Create a separate Comparator
+**Goal:**  
+Create a separate `Comparator` to sort by:
 
-Sort by:
+1. Last Name
+2. First Name (if last names match)
 
-Last Name
+**_Effective Java – Item 14_**  
+Use `Comparator` construction methods. Example:
 
-First Name (if last names match)
-
-Effective Java – Item 14
-
-Use Comparator construction methods.
-
-Example:
-
+```java
 Comparator.comparing(Person::getLastName)
           .thenComparing(Person::getFirstName);
+```
 
-
-Expected Output:
-
+**Expected Output:**
+```plaintext
 Sorting by Name (Comparator):
 Jane Smith
 Mario Rossi
 John Verdi
+```
 
-🛡️ Module 4: Robustness & Exceptions
+---
 
-Focus: Validation, error handling, and defensive coding.
+# 🛡️ Module 4: Robustness & Exceptions
+**Focus:** Validation, error handling, and defensive coding.
 
-Exercise 10: Input Sanitization
+---
 
-Goal:
+## Exercise 10: Input Sanitization
 
-Ask user to input 10 names
+**Goal:**  
+1. Ask user to input 10 names.
+2. Store them in an `ArrayList`.
+3. Reject inputs containing numbers or symbols.
+4. Do not advance the counter on invalid input.
 
-Store them in an ArrayList
+**_Effective Java – Item 69_**  
+Use exceptions only for exceptional conditions. Validation should use `if/else`, not `try/catch`.
 
-Reject inputs containing numbers or symbols
-
-Do not advance the counter on invalid input
-
-Effective Java – Item 69
-
-Use exceptions only for exceptional conditions.
-
-Validation should use if/else, not try/catch.
-
-Expected Output:
-
+**Expected Output:**
+```plaintext
 > Enter name: Mario123
 Invalid input: Name cannot contain numbers. Try again.
 > Enter name: Mario
 Name added.
+```
 
-Exercise 11: Safe List Removal
+---
 
-Goal:
+## Exercise 11: Safe List Removal
 
-Ask the user for a name to remove
+**Goal:**  
+1. Ask the user for a name to remove.
+2. Check existence before removing.
 
-Check existence before removing
+**_Effective Java – Item 54_**  
+Return empty collections or `Optional`, not null.
 
-Effective Java – Item 54
-
-Return empty collections or Optional, not null.
-
-Expected Output:
-
+**Expected Output:**
+```plaintext
 > Enter name to remove: Giovanni
 Name not found in the list.
 > Enter name to remove: Mario
 Mario removed successfully.
+```
 
-Exercise 12: Custom Exceptions
+---
 
-Goal:
+## Exercise 12: Custom Exceptions
 
-Create a custom checked exception: ProfanityException
+**Goal:**  
+1. Create a custom checked exception: `ProfanityException`.
+2. Scan a user-input sentence.
+3. If it contains a banned word → throw exception.
+4. Otherwise, check if it contains "Java" (case-insensitive).
 
-Scan a user-input sentence
-
-If it contains a banned word → throw exception
-
-Otherwise, check if it contains "Java" (case-insensitive)
-
-Effective Java – Items 70 & 72
-
+**_Effective Java – Items 70 & 72_**  
 Use checked exceptions for recoverable business conditions.
 
-Expected Output:
-
+**Expected Output:**
+```plaintext
 > Input: This is a badword
 Exception: Profanity detected in the input!
 
@@ -346,3 +317,4 @@ The sentence does NOT contain 'Java'.
 
 > Input: I love Java programming
 The sentence contains the word 'Java'.
+```
