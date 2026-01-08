@@ -40,11 +40,7 @@ The bootcamp is divided into **4 modules**:
 ## Exercise 1: Robust Search
 
 **Goal:**  
-Create a method:
-
-```java
-int findNumber(int target, int[] data)
-```
+Create a method that takes a target integer and an array of integers as parameters and returns the index where found.
 
 1. Generate an array of 50 random integers (values 1–100).
 2. Search for the target number.
@@ -73,13 +69,7 @@ Number not present in the array
 2. Find both minimum and maximum values.
 
 **_Effective Java – Item 59_**  
-Know and use the libraries. While manual loops are good practice, be aware that:
-
-```java
-Arrays.stream(arr).summaryStatistics()
-```
-
-is the modern standard.
+Know and use the libraries. While manual loops are good practice, be aware that Java provides built-in utilities like stream operations with summaryStatistics() for such tasks.
 
 **Expected Output:**
 ```plaintext
@@ -115,11 +105,7 @@ Reversed: 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
 2. Calculate the sum of even numbers only.
 
 **_Effective Java – Item 45_**  
-Use streams judiciously. This logic can be expressed as:
-
-```java
-Arrays.stream(arr).filter(x -> x % 2 == 0).sum();
-```
+Use streams judiciously. This logic can be expressed using streams with filter and sum operations.
 
 **Expected Output:**
 ```plaintext
@@ -206,14 +192,7 @@ Number of people in the set: 3
 2. Sort by age (ascending).
 
 **_Effective Java – Item 14_**  
-Consider implementing `Comparable`. Use:
-
-```java
-Integer.compare()
-LocalDate.compareTo()
-```
-
-...instead of subtraction.
+Consider implementing `Comparable`. Use proper comparison methods like Integer.compare() or LocalDate.compareTo() instead of subtraction.
 
 **Expected Output:**
 ```plaintext
@@ -234,12 +213,7 @@ Create a separate `Comparator` to sort by:
 2. First Name (if last names match)
 
 **_Effective Java – Item 14_**  
-Use `Comparator` construction methods. Example:
-
-```java
-Comparator.comparing(Person::getLastName)
-          .thenComparing(Person::getFirstName);
-```
+Use `Comparator` construction methods like comparing() and thenComparing() with method references.
 
 **Expected Output:**
 ```plaintext
